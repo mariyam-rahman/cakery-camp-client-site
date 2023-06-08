@@ -1,5 +1,5 @@
 import { Footer } from "flowbite-react";
-
+import logo from "../../assets/logo3.png";
 const Footers = () => {
   return (
     <div>
@@ -11,7 +11,8 @@ const Footers = () => {
                 alt="Flowbite Logo"
                 href="https://flowbite.com"
                 name="Flowbite"
-                src="https://flowbite.com/docs/images/logo.svg"
+                src={logo}
+                className="object-contain"
               />
             </div>
             <div className="grid grid-cols-2 gap-8 sm:mt-4 sm:grid-cols-3 sm:gap-6">
