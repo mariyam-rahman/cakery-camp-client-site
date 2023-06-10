@@ -2,6 +2,7 @@ import { Avatar, Dropdown, Navbar, Tooltip } from "flowbite-react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useContext } from "react";
 import { AuthContext } from "./../../AuthProviders";
+import logo from "../../assets/logo.png";
 
 const Header = () => {
   const navigate = useNavigate();
@@ -11,19 +12,15 @@ const Header = () => {
 
   return (
     <div>
-      <Navbar fluid={true} rounded={true} className=" bg-[#ffffff] h-20 ">
+      <Navbar fluid={true} rounded={true} className=" bg-[#ffffff] h-24 ">
         <Navbar.Brand
           onClick={() => navigate("/")}
           style={{ cursor: "pointer" }}
         >
-          <img
-            src="/assets/logo.png"
-            className="mr-3 h-6 sm:h-10"
-            alt=" Logo"
-          />
-          <span className="self-center whitespace-nowrap text-xl font-semibold dark:text-white">
+          <img src={logo} className="h-10 sm:h-20" alt=" Logo" />
+          {/* <span className="self-center whitespace-nowrap text-xl font-semibold dark:text-white">
             The Cakery Camp
-          </span>
+          </span> */}
         </Navbar.Brand>
         <Tooltip id="my-tooltip" />
 
@@ -80,7 +77,7 @@ const Header = () => {
 
         <Navbar.Collapse>
           <Link to={"/"}>
-            <Navbar.Link active={location.pathname == "/"}>HOME</Navbar.Link>
+            <Navbar.Link active={location.pathname == "/"}>Home</Navbar.Link>
           </Link>
           <Link to={"/classes"}>
             <Navbar.Link
@@ -96,10 +93,25 @@ const Header = () => {
               Instructors
             </Navbar.Link>
           </Link>
-
           <Link to={"/dashboard"}>
             <Navbar.Link active={location.pathname == "/dashboard"}>
               Dashboard
+            </Navbar.Link>
+          </Link>
+          <Link to={"/dashboard/admin"}>
+            <Navbar.Link active={location.pathname == "/dashboard/admin"}>
+              Admin
+            </Navbar.Link>
+          </Link>
+
+          <Link to={"/dashboard/instructor"}>
+            <Navbar.Link active={location.pathname == "/dashboard/instructor"}>
+              Instructor
+            </Navbar.Link>
+          </Link>
+          <Link to={"/dashboard/student"}>
+            <Navbar.Link active={location.pathname == "/student"}>
+              Student
             </Navbar.Link>
           </Link>
         </Navbar.Collapse>

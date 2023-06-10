@@ -10,6 +10,9 @@ import Dashboard from "./pages/Dashboard/Dashboard";
 import Login from "./pages/Login/Login";
 import Register from "./pages/Register/Register";
 import NotFound from "./pages/NotFound";
+import Student from "./pages/Dashboard/Student/Student";
+import Admin from "./pages/Dashboard/Admin/Admin";
+import Instructor from "./pages/Dashboard/InstructorBoard/Instructor";
 
 const router = createBrowserRouter([
   {
@@ -31,6 +34,20 @@ const router = createBrowserRouter([
       {
         path: "/dashboard",
         element: <Dashboard></Dashboard>,
+        children: [
+          {
+            path: "/dashboard/student",
+            element: <Student></Student>,
+          },
+          {
+            path: "/dashboard/admin",
+            element: <Admin></Admin>,
+          },
+          {
+            path: "/dashboard/instructor",
+            element: <Instructor></Instructor>,
+          },
+        ],
       },
       {
         path: "/login",

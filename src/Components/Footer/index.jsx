@@ -7,13 +7,7 @@ const Footers = () => {
         <div className="w-full ">
           <div className="grid w-full justify-between sm:flex sm:justify-between md:flex md:grid-cols-1">
             <div>
-              <Footer.Brand
-                alt="Flowbite Logo"
-                href="https://flowbite.com"
-                name="Flowbite"
-                src={logo}
-                className="object-contain"
-              />
+              <Footer.Brand alt=" Logo" src={logo} className="h-10 sm:h-24" />
             </div>
             <div className="grid grid-cols-2 gap-8 sm:mt-4 sm:grid-cols-3 sm:gap-6">
               <div>
