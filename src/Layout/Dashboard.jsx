@@ -1,4 +1,4 @@
-import { Sidebar } from "flowbite-react";
+import { Avatar, Sidebar } from "flowbite-react";
 import { Link, Outlet } from "react-router-dom";
 import { HiChartPie } from "react-icons/hi";
 import { RiWalletFill } from "react-icons/ri";
@@ -16,8 +16,8 @@ import {
 } from "react-icons/fa";
 const user = {
   // role: "admin",
-  // role: "instructor",
-  role: "student",
+  role: "instructor",
+  // role: "student",
   name: "Lamia",
 };
 const Dashboard = () => {

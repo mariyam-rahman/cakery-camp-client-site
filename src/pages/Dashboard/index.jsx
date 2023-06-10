@@ -4,8 +4,8 @@ import Student from "./Student";
 
 const user = {
   //   role: "admin",
-  //   role: "instructor",
-  role: "student",
+  role: "instructor",
+  // role: "student",
   name: "Lamia",
 };
 

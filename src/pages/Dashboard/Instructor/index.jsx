@@ -1,6 +1,7 @@
-import { FaBookmark, FaPollH } from "react-icons/fa";
+import { FaFolderOpen, FaFolderPlus } from "react-icons/fa";
 import { Sidebar } from "flowbite-react";
 import MyClasses from "./MyClasses";
+import AddClass from "./AddClass";
 import { useState } from "react";
 export default function Instructor() {
   const [selectedPanel, setSelectedPanel] = useState(null);
@@ -12,23 +13,29 @@ export default function Instructor() {
           <Sidebar.ItemGroup className="">
             <Sidebar.Item
               href="#"
-              icon={FaBookmark}
-              onClick={() => setSelectedPanel("selectedClass")}
+              icon={FaFolderOpen}
+              onClick={() => setSelectedPanel("myClasses")}
             >
-              <p>Selected Classes</p>
+              <p>My Classes</p>
             </Sidebar.Item>
             <Sidebar.Item
               href="#"
-              icon={FaPollH}
-              onClick={() => setSelectedPanel("myClasses")}
+              icon={FaFolderPlus}
+              onClick={() => setSelectedPanel("addClass")}
             >
-              <p>Enrolled Classes</p>
+              <p>Add Class</p>
             </Sidebar.Item>
           </Sidebar.ItemGroup>
         </Sidebar>
       </div>
       <div className="container mx-auto">
-        {selectedPanel == "myClasses" && <MyClasses></MyClasses>}
+        {selectedPanel == "myClasses" ? (
+          <MyClasses></MyClasses>
+        ) : selectedPanel == "addClass" ? (
+          <AddClass></AddClass>
+        ) : (
+          <></>
+        )}
       </div>
     </div>
   );
