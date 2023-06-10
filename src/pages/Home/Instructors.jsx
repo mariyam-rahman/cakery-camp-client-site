@@ -1,4 +1,18 @@
+import { useEffect, useState } from "react";
+import axios from "axios";
 const Instructor = () => {
+  const [instructors, setInstructors] = useState([]);
+  useEffect(() => {
+    axios
+      .get("http://localhost:3000/users", { params: { type: "instructor" } })
+      .then((res) => {
+        console.log(res);
+        setInstructors(res.data.instructors);
+      })
+      .catch(() => {
+        console.log(err);
+      });
+  }, []);
   return (
     <div>
       <div className="p-10">

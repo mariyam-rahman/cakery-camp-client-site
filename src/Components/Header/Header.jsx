@@ -110,7 +110,7 @@ const Header = () => {
             </Navbar.Link>
           </Link>
           <Link to={"/dashboard/student"}>
-            <Navbar.Link active={location.pathname == "/student"}>
+            <Navbar.Link active={location.pathname == "/dashboard/student"}>
               Student
             </Navbar.Link>
           </Link>
