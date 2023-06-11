@@ -7,7 +7,7 @@ export default function Instructor() {
   const [selectedPanel, setSelectedPanel] = useState(null);
 
   return (
-    <div className="flex gap-10" style={{ height: "100vh" }}>
+    <div className="flex gap-10" style={{ minHeight: "100vh" }}>
       <div className="">
         <Sidebar aria-label="Sidebar with content separator example">
           <Sidebar.ItemGroup className="">

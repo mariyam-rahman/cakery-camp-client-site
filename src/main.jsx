@@ -8,7 +8,7 @@ import Classes from "./pages/Classes/Classes";
 import Instructors from "./pages/Instructors/Instructors";
 // import Dashboard from "./Layout/Dashboard";
 import Dashboard from "./pages/Dashboard";
-import Login from "./pages/Login/Login";
+import Login from "./pages/Login";
 import Register from "./pages/Register/Register";
 import NotFound from "./pages/NotFound";
 // import Student from "./pages/Dashboard/Student/Student";
@@ -80,8 +80,6 @@ const router = createBrowserRouter([
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
-    <AuthProvider>
-      <RouterProvider router={router} />
-    </AuthProvider>
+    <RouterProvider router={router} />
   </React.StrictMode>
 );

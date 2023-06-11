@@ -7,6 +7,7 @@ import logo from "../../assets/logo.png";
 const Header = () => {
   const navigate = useNavigate();
   const { signIn, user, logout, token } = useContext(AuthContext);
+
   const location = useLocation();
   // console.log(location);
 
@@ -76,6 +77,7 @@ const Header = () => {
         </div> */}
 
         <Navbar.Collapse>
+          <button onClick={logout}>log out</button>
           <Link to={"/"}>
             <Navbar.Link active={location.pathname == "/"}>Home</Navbar.Link>
           </Link>

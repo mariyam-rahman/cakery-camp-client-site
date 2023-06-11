@@ -2,11 +2,12 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import { useContext, useEffect } from "react";
 import { AuthContext } from "../../AuthProvider";
+import axios from "axios";
 
 const Login = () => {
   const location = useLocation();
   const navigate = useNavigate();
-  // const { signIn, user, handleGoogleSignIn } = useContext(AuthContext);
+  const { signIn, user, handleGoogleSignIn } = useContext(AuthContext);
   // console.log({ location });
 
   const handleLogin = async (event) => {
@@ -16,24 +17,15 @@ const Login = () => {
     const password = form.password.value;
     console.log(email, password);
 
-    try {
-      await signIn(email, password);
-      navigate(location.state?.redirectTo || "/", { state: location.state });
-      Swal.fire({
-        icon: "success",
-        title: "Login Successful",
-        text: "You have successfully logged in!",
-      });
-    } catch (error) {
-      console.error(error);
-    }
+    signIn(email, password);
   };
 
-  // useEffect(() => {
-  //   if (user) {
-  //     navigate(location.state?.redirectTo || "/");
-  //   }
-  // }, [user]);
+  useEffect(() => {
+    if (user) {
+      navigate(location.state?.redirectTo || "/");
+    }
+  }, [user]);
+
   return (
     <div>
       <section className="bg-gray-50 dark:bg-gray-900 ">

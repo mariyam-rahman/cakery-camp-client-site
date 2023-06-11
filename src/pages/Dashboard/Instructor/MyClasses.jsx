@@ -1,6 +1,23 @@
+import axios from "axios";
 import { Button, Table } from "flowbite-react";
+import { useContext, useEffect, useState } from "react";
+import { AuthContext } from "../../../AuthProvider";
 
 const MyClasses = () => {
+  const [courses, setCourses] = useState([]);
+  const { user } = useContext(AuthContext);
+  useEffect(() => {
+    axios
+      .get("http://localhost:3000/courses", { params: { userId: user._id } })
+
+      .then((res) => {
+        console.log(res);
+        setCourses(res.data.courses);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, []);
   return (
     <div>
       <section className="bg-white dark:bg-gray-900">
@@ -15,7 +32,28 @@ const MyClasses = () => {
             </p>
           </div>
           <div className="">
-            <ClassRow></ClassRow>
+            <Table striped className="text-center">
+              <Table.Head>
+                <Table.HeadCell style={{}}>Image</Table.HeadCell>
+                <Table.HeadCell>Name</Table.HeadCell>
+                <Table.HeadCell>Instructor</Table.HeadCell>
+
+                <Table.HeadCell>
+                  Available <br /> seats
+                </Table.HeadCell>
+                <Table.HeadCell>
+                  Total <br /> Enrolled
+                </Table.HeadCell>
+                <Table.HeadCell>Price</Table.HeadCell>
+                <Table.HeadCell>Status</Table.HeadCell>
+                <Table.HeadCell> Action</Table.HeadCell>
+              </Table.Head>
+              <Table.Body className="divide-y">
+                {courses.map((course) => (
+                  <Course course={course} key={course._id} />
+                ))}
+              </Table.Body>
+            </Table>
           </div>
         </div>
       </section>
@@ -23,44 +61,31 @@ const MyClasses = () => {
   );
 };
 
-const ClassRow = () => {
+const Course = ({ course }) => {
+  // const [openModal, setOpenModal] = useState();
+  // const props = { openModal, setOpenModal };
   return (
-    <Table striped className="text-center">
-      <Table.Head>
-        <Table.HeadCell>Id</Table.HeadCell>
-        <Table.HeadCell>Image</Table.HeadCell>
-        <Table.HeadCell>Class Name</Table.HeadCell>
-        <Table.HeadCell>Instructor</Table.HeadCell>
-        <Table.HeadCell>Email</Table.HeadCell>
-        <Table.HeadCell>Available seats</Table.HeadCell>
-        <Table.HeadCell>Total Enrolled</Table.HeadCell>
-        <Table.HeadCell>Price</Table.HeadCell>
-        <Table.HeadCell>Status</Table.HeadCell>
-        <Table.HeadCell>Feedback</Table.HeadCell>
-        <Table.HeadCell> Action</Table.HeadCell>
-      </Table.Head>
-      <Table.Body className="divide-y">
-        <Table.Row className="bg-white dark:border-gray-700 dark:bg-gray-800">
-          <Table.Cell>1</Table.Cell>
-          <Table.Cell>
-            {" "}
-            <img src="../../../assets/bread.jpg" alt="" />{" "}
-          </Table.Cell>
+    <Table.Row className="bg-white dark:border-gray-700 dark:bg-gray-800">
+      <Table.Cell style={{ flex: 2 }}>
+        <img src="../../../assets/bread.jpg" alt="" />
+      </Table.Cell>
 
-          <Table.Cell>Red Velvet Cake</Table.Cell>
-          <Table.Cell>joe@gmail.com</Table.Cell>
-          <Table.Cell>Milky Donut</Table.Cell>
-          <Table.Cell>20</Table.Cell>
-          <Table.Cell>10</Table.Cell>
-          <Table.Cell>$100</Table.Cell>
-          <Table.Cell>Denied</Table.Cell>
-          <Table.Cell>improve more</Table.Cell>
-          <Table.Cell>
-            <Button>Update </Button>
-          </Table.Cell>
-        </Table.Row>
-      </Table.Body>
-    </Table>
+      <Table.Cell>{course.name}</Table.Cell>
+      <Table.Cell>
+        <div>osama boss</div>
+        <div>joe@gmail.com</div>
+      </Table.Cell>
+      <Table.Cell>20</Table.Cell>
+      <Table.Cell>10</Table.Cell>
+      <Table.Cell>$100</Table.Cell>
+      <Table.Cell>
+        <div>denied</div>
+        <div>scam course</div>
+      </Table.Cell>
+      <Table.Cell>
+        <Button>Update</Button>
+      </Table.Cell>
+    </Table.Row>
   );
 };
 
