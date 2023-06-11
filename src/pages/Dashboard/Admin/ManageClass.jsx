@@ -8,7 +8,7 @@ const ManageClass = () => {
   const [courses, setCourses] = useState([]);
   useEffect(() => {
     axios
-      .get("http://localhost:3000/courses")
+      .get(`${import.meta.env.VITE_API_BASE_URL}/courses`)
       .then((res) => {
         console.log(res);
         setCourses(res.data.courses);
@@ -21,7 +21,7 @@ const ManageClass = () => {
   const changeStatus = (status, courseId) => {
     axios
       .put(
-        `http://localhost:3000/course/${courseId}/status`,
+        `${import.meta.env.VITE_API_BASE_URL}/course/${courseId}/status`,
         { status: status },
         { headers: { Authorization: token } }
       )
@@ -41,7 +41,7 @@ const ManageClass = () => {
   const sendFeedback = (feedback, courseId) => {
     axios
       .put(
-        `http://localhost:3000/course/${courseId}/status`,
+        `${import.meta.env.VITE_API_BASE_URL}/course/${courseId}/status`,
         { adminFeedback: feedback },
         { headers: { Authorization: token } }
       )

@@ -4,12 +4,12 @@ const Instructor = () => {
   const [instructors, setInstructors] = useState([]);
 
   useEffect(() => {
-    fetch("http://localhost:3000/users")
+    fetch(`${import.meta.env.VITE_API_BASE_URL}/users`)
       .then((res) => res.json())
       .then((data) => {
         console.log(data);
         const filteredUsers = data.users
-          .filter((instructor) => instructor.role === "instructor")
+          .filter((instructor) => instructor.role == "instructor")
           .slice(0, 6);
         setInstructors(filteredUsers);
       })

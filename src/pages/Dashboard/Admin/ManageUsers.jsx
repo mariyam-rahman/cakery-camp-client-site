@@ -8,7 +8,7 @@ const ManageUsers = () => {
   const [users, setUsers] = useState([]);
   useEffect(() => {
     axios
-      .get("http://localhost:3000/users")
+      .get(`${import.meta.env.VITE_API_BASE_URL}/users`)
       .then((res) => {
         console.log(res);
         setUsers(res.data.users.filter((e) => e._id != me._id));
@@ -22,7 +22,7 @@ const ManageUsers = () => {
     console.log("change role to " + role);
     axios
       .put(
-        `http://localhost:3000/user/${id}/role`,
+        `${import.meta.env.VITE_API_BASE_URL}/user/${id}/role`,
         { role: role },
         { headers: { Authorization: token } }
       )

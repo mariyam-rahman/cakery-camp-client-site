@@ -10,7 +10,7 @@ const MyClasses = () => {
 
   const updateCourse = (id, updatedData = {}) => {
     axios
-      .put(`http://localhost:3000/course/${id}`, updatedData, {
+      .put(`${import.meta.env.VITE_API_BASE_URL}/course/${id}`, updatedData, {
         params: { userId: user._id },
         headers: { Authorization: token },
       })
@@ -44,7 +44,9 @@ const MyClasses = () => {
 
   useEffect(() => {
     axios
-      .get("http://localhost:3000/courses", { params: { userId: user._id } })
+      .get(`${import.meta.env.VITE_API_BASE_URL}/courses`, {
+        params: { userId: user._id },
+      })
       .then((res) => {
         console.log(res);
         setCourses(res.data.courses);
