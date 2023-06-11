@@ -1,4 +1,4 @@
-import { Avatar, Dropdown, Navbar, Tooltip } from "flowbite-react";
+import { Avatar, Button, Dropdown, Navbar, Tooltip } from "flowbite-react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useContext, useEffect } from "react";
 import { AuthContext } from "./../../AuthProvider";
@@ -77,7 +77,6 @@ const Header = () => {
         </div> */}
 
         <Navbar.Collapse>
-          <button onClick={logout}>log out</button>
           <Link to={"/"}>
             <Navbar.Link active={location.pathname == "/"}>Home</Navbar.Link>
           </Link>
@@ -101,6 +100,7 @@ const Header = () => {
             </Navbar.Link>
           </Link>
         </Navbar.Collapse>
+        <Button onClick={logout}>Log Out</Button>
       </Navbar>
     </div>
   );

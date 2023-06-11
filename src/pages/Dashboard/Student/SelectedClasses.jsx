@@ -3,10 +3,6 @@ import img from "../../../assets/panake.jpg";
 import { FaTrashAlt } from "react-icons/fa";
 import { useEffect } from "react";
 const SelectedClasses = () => {
-  const [selected, setSelected] = useState([]);
-  useEffect(() => {
-    fetch("");
-  }, []);
   return (
     <div>
       <section className="bg-white dark:bg-gray-900">

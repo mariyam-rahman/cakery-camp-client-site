@@ -3,6 +3,7 @@ import Swal from "sweetalert2";
 import { useContext, useEffect } from "react";
 import { AuthContext } from "../../AuthProvider";
 import axios from "axios";
+import { Button } from "flowbite-react";
 
 const Login = () => {
   const location = useLocation();
@@ -72,9 +73,8 @@ const Login = () => {
                     required
                   />
                 </div>
-                <button type="submit" className="w-full btn ">
-                  LOGIN
-                </button>{" "}
+
+                <Button type="submit">LOGIN</Button>
               </form>
 
               <p className="text-center text-gray-400">

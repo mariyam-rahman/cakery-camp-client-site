@@ -1,6 +1,45 @@
+import axios from "axios";
 import { Button, Table } from "flowbite-react";
+import { useState, useEffect, useContext } from "react";
+import { AuthContext } from "../../../AuthProvider";
 
 const ManageUsers = () => {
+  const { user: me, token } = useContext(AuthContext);
+  const [users, setUsers] = useState([]);
+  useEffect(() => {
+    axios
+      .get("http://localhost:3000/users")
+      .then((res) => {
+        console.log(res);
+        setUsers(res.data.users.filter((e) => e._id != me._id));
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, []);
+
+  const changeUserRole = (id, role) => {
+    console.log("change role to " + role);
+    axios
+      .put(
+        `http://localhost:3000/user/${id}/role`,
+        { role: role },
+        { headers: { Authorization: token } }
+      )
+      .then((res) => {
+        console.log(res);
+        setUsers(
+          users.map((user) => {
+            if (user._id == id) {
+              return res.data.user;
+            } else {
+              return user;
+            }
+          })
+        );
+      });
+  };
+
   return (
     <section className=" mb-28">
       <div className=" text-center mb-8 lg:mb-16">
@@ -13,43 +52,64 @@ const ManageUsers = () => {
         </p>
       </div>
       <div>
-        <UsersTable></UsersTable>
+        <Table striped className="">
+          <Table.Head>
+            <Table.HeadCell>Id</Table.HeadCell>
+            <Table.HeadCell>Name</Table.HeadCell>
+            <Table.HeadCell>Email</Table.HeadCell>
+            <Table.HeadCell>Role</Table.HeadCell>
+            <Table.HeadCell className="pl-32">Action</Table.HeadCell>
+          </Table.Head>
+          <Table.Body className="divide-y">
+            {users.map((user, i) => (
+              <UserRow
+                user={user}
+                index={i}
+                key={i}
+                changeUserRole={changeUserRole}
+              />
+            ))}
+          </Table.Body>
+        </Table>
       </div>
     </section>
   );
 };
 
-const UsersTable = () => {
+const UserRow = ({ user, changeUserRole }) => {
   return (
-    <Table striped className="">
-      <Table.Head>
-        <Table.HeadCell>Id</Table.HeadCell>
-        <Table.HeadCell>Name</Table.HeadCell>
-        <Table.HeadCell>Email</Table.HeadCell>
-        <Table.HeadCell>Role</Table.HeadCell>
-        <Table.HeadCell className="pl-32">Action</Table.HeadCell>
-      </Table.Head>
-      <Table.Body className="divide-y">
-        <Table.Row className="bg-white dark:border-gray-700 dark:bg-gray-800">
-          <Table.Cell className="whitespace-nowrap font-medium text-gray-900 dark:text-white">
-            1
-          </Table.Cell>
-          <Table.Cell>Lamia Rahman</Table.Cell>
-          <Table.Cell>Lamia@gamil.com</Table.Cell>
-          <Table.Cell>Instructor</Table.Cell>
-          <Table.Cell>
-            {/* <Dropdown inline label="Make Admin">
-              <Dropdown.Item>Make Instructor</Dropdown.Item>
-              <Dropdown.Item>Make Admin</Dropdown.Item>
-            </Dropdown> */}
-            <div className="flex gap-6">
-              <Button>Make Admin</Button>
-              <Button>Make Instructor</Button>
-            </div>
-          </Table.Cell>
-        </Table.Row>
-      </Table.Body>
-    </Table>
+    <Table.Row className="bg-white dark:border-gray-700 dark:bg-gray-800">
+      <Table.Cell className="whitespace-nowrap font-medium text-gray-900 dark:text-white">
+        1
+      </Table.Cell>
+      <Table.Cell>{user.name}</Table.Cell>
+      <Table.Cell>{user.email}</Table.Cell>
+      <Table.Cell>{user.role}</Table.Cell>
+      <Table.Cell>
+        {/* <Dropdown inline label="Make Admin">
+        <Dropdown.Item>Make Instructor</Dropdown.Item>
+        <Dropdown.Item>Make Admin</Dropdown.Item>
+      </Dropdown> */}
+        <div className="flex flex-col gap-1">
+          <Button
+            disabled={user.role == "admin"}
+            onClick={() => {
+              changeUserRole(user._id, "admin");
+            }}
+          >
+            Make Admin
+          </Button>
+          <Button
+            onClick={() => {
+              changeUserRole(user._id, "instructor");
+            }}
+            disabled={user.role == "instructor"}
+          >
+            Make Instructor
+          </Button>
+        </div>
+      </Table.Cell>
+    </Table.Row>
   );
 };
 

@@ -1,13 +1,9 @@
 import { Sidebar } from "flowbite-react";
-
 import { HiChartPie } from "react-icons/hi";
-
 import { FaClipboardCheck, FaUserCheck } from "react-icons/fa";
 import { useState } from "react";
-
-const Overview = () => "Overview ";
-const ManageClasses = () => "ManageClasses ";
-const ManageUsers = () => "ManageUsers ";
+import ManageClass from "./ManageClass";
+import ManageUsers from "./ManageUsers";
 
 const Admin = () => {
   const [selectedPanel, setSelectedPanel] = useState(null);
@@ -18,17 +14,8 @@ const Admin = () => {
         <Sidebar aria-label="Sidebar with content separator example">
           <Sidebar.Items className="">
             <Sidebar.ItemGroup>
-              <Sidebar.Item
-                icon={FaUserCheck}
-                onClick={() => setSelectedPanel("overview")}
-              >
-                <p>Lamia</p>
-              </Sidebar.Item>
-              <Sidebar.Item
-                icon={HiChartPie}
-                onClick={() => setSelectedPanel("overview")}
-              >
-                <p>Overview</p>
+              <Sidebar.Item icon={HiChartPie}>
+                <p>Admin Home</p>
               </Sidebar.Item>
 
               <Sidebar.Item
@@ -48,10 +35,8 @@ const Admin = () => {
         </Sidebar>
       </div>
       <div className="container mx-auto">
-        {selectedPanel == "overview" ? (
-          <Overview />
-        ) : selectedPanel == "manageClasses" ? (
-          <ManageClasses />
+        {selectedPanel == "manageClasses" ? (
+          <ManageClass></ManageClass>
         ) : selectedPanel == "manageUsers" ? (
           <ManageUsers />
         ) : (
