@@ -1,7 +1,64 @@
-import { Button, Dropdown, Table } from "flowbite-react";
+import { Button, Dropdown, Modal, Table } from "flowbite-react";
 import img from "../../../assets/panake.jpg";
-
+import { useState, useEffect, useContext } from "react";
+import { AuthContext } from "../../../AuthProvider";
+import axios from "axios";
 const ManageClass = () => {
+  const { user, token } = useContext(AuthContext);
+  const [courses, setCourses] = useState([]);
+  useEffect(() => {
+    axios
+      .get("http://localhost:3000/courses")
+      .then((res) => {
+        console.log(res);
+        setCourses(res.data.courses);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, []);
+
+  const changeStatus = (status, courseId) => {
+    axios
+      .put(
+        `http://localhost:3000/course/${courseId}/status`,
+        { status: status },
+        { headers: { Authorization: token } }
+      )
+      .then((res) => {
+        setCourses(
+          courses.map((e) => {
+            if (e._id == courseId) {
+              return res.data.course;
+            } else {
+              return e;
+            }
+          })
+        );
+      });
+  };
+
+  const sendFeedback = (feedback, courseId) => {
+    axios
+      .put(
+        `http://localhost:3000/course/${courseId}/status`,
+        { adminFeedback: feedback },
+        { headers: { Authorization: token } }
+      )
+      .then((res) => {
+        console.log(res);
+        setCourses(
+          courses.map((e) => {
+            if (e._id == courseId) {
+              return res.data.course;
+            } else {
+              return e;
+            }
+          })
+        );
+      });
+  };
+
   return (
     <section className="bg-white dark:bg-gray-900">
       <div className="py-8 px-4 mx-auto lg:py-16 lg:px-6 ">
@@ -20,43 +77,23 @@ const ManageClass = () => {
               <Table.HeadCell>Image</Table.HeadCell>
               <Table.HeadCell>Name</Table.HeadCell>
               <Table.HeadCell>Instructor</Table.HeadCell>
-              <Table.HeadCell>Email</Table.HeadCell>
-              <Table.HeadCell>Available Seat</Table.HeadCell>
+
+              <Table.HeadCell>
+                Available <br /> Seats
+              </Table.HeadCell>
               <Table.HeadCell>Price</Table.HeadCell>
               <Table.HeadCell>Status</Table.HeadCell>
               <Table.HeadCell>Actions</Table.HeadCell>
+              <Table.HeadCell></Table.HeadCell>
             </Table.Head>
             <Table.Body className="divide-y">
-              <Table.Row className="bg-white dark:border-gray-700 dark:bg-gray-800">
-                <Table.Cell>
-                  <img src={img} alt="" />
-                </Table.Cell>
-                <Table.Cell className="whitespace-nowrap font-medium text-gray-900 dark:text-white">
-                  Cheese Pancake
-                </Table.Cell>
-                <Table.Cell>Bonnie Green</Table.Cell>
-                <Table.Cell>Bonnie@gmail.com</Table.Cell>
-                <Table.Cell>200+</Table.Cell>
-                <Table.Cell>$299</Table.Cell>
-                <Table.Cell>pending</Table.Cell>
-                <Table.Cell>
-                  <Dropdown inline label="Status">
-                    <Dropdown.Item>Approve</Dropdown.Item>
-                    <Dropdown.Item>Reject</Dropdown.Item>
-                  </Dropdown>
-                </Table.Cell>
-                {/* <Table.Cell>
-                  <Button> Approve </Button>
-                </Table.Cell>
-                <Table.Cell>
-                  {" "}
-                  <Button>Deny</Button>
-                </Table.Cell>
-                <Table.Cell>
-                  {" "}
-                  <Button>Feedback</Button>
-                </Table.Cell> */}
-              </Table.Row>
+              {courses.map((e) => (
+                <CourseItem
+                  course={e}
+                  changeStatus={changeStatus}
+                  sendFeedback={sendFeedback}
+                />
+              ))}
             </Table.Body>
           </Table>
         </div>
@@ -64,43 +101,111 @@ const ManageClass = () => {
     </section>
   );
 };
-const ClassTable = () => {
+const CourseItem = ({ course, changeStatus, sendFeedback }) => {
+  const [openModal, setOpenModal] = useState(false);
+  const [feedbackText, setFeedbackText] = useState("");
+  // const confirmFeedback = () => {
+  //   sendFeedback(feedbackText, course._id);
+  // };
   return (
-    <div>
-      <Table.Body className="divide-y">
-        <Table.Row className="bg-white dark:border-gray-700 dark:bg-gray-800">
-          <Table.Cell>
-            <img src={img} alt="" />
-          </Table.Cell>
-          <Table.Cell className="whitespace-nowrap font-medium text-gray-900 dark:text-white">
-            Cheese Pancake
-          </Table.Cell>
-          <Table.Cell>Bonnie Green</Table.Cell>
-          <Table.Cell>Bonnie@gmail.com</Table.Cell>
-          <Table.Cell>200+</Table.Cell>
-          <Table.Cell>$299</Table.Cell>
-          <Table.Cell>
-            <Dropdown inline label="Status">
-              <Dropdown.Item></Dropdown.Item>
-              <Dropdown.Item>Pending</Dropdown.Item>
-              <Dropdown.Item>Approved</Dropdown.Item>
-              <Dropdown.Item>Denied</Dropdown.Item>
-            </Dropdown>
-          </Table.Cell>
-          <Table.Cell>
-            <Button> Approve </Button>
-          </Table.Cell>
-          <Table.Cell>
-            {" "}
-            <Button>Deny</Button>
-          </Table.Cell>
-          <Table.Cell>
-            {" "}
-            <Button>Feedback</Button>
-          </Table.Cell>
-        </Table.Row>
-      </Table.Body>
-    </div>
+    <Table.Row className="bg-white dark:border-gray-700 dark:bg-gray-800">
+      <Table.Cell>
+        <img src={img} alt="" />
+      </Table.Cell>
+      <Table.Cell className="whitespace-nowrap font-medium text-gray-900 dark:text-white">
+        {course.name}
+      </Table.Cell>
+      <Table.Cell>
+        <div>{course.instructor.name}</div>
+        <div>{course.instructor.email}</div>
+      </Table.Cell>
+      <Table.Cell>200+</Table.Cell>
+      <Table.Cell>$299</Table.Cell>
+      <Table.Cell>{course.status}</Table.Cell>
+      <Table.Cell>
+        <Dropdown inline label="Change Status">
+          <Dropdown.Item
+            onClick={() => {
+              changeStatus("approved", course._id);
+            }}
+          >
+            Approved
+          </Dropdown.Item>
+          <Dropdown.Item
+            onClick={() => {
+              changeStatus("denied", course._id);
+            }}
+          >
+            denied
+          </Dropdown.Item>
+          <Dropdown.Item
+            onClick={() => {
+              changeStatus("pending", course._id);
+            }}
+          >
+            pending
+          </Dropdown.Item>
+        </Dropdown>
+      </Table.Cell>
+
+      <Table.Cell>
+        <Button
+          disabled={course.status != "denied"}
+          onClick={() => setOpenModal(true)}
+        >
+          {" "}
+          Feedback
+        </Button>
+        <FeedbackModal
+          show={openModal}
+          setFeedbackText={setFeedbackText}
+          sendFeedback={sendFeedback}
+          onClose={() => setOpenModal(false)}
+          course={course}
+        />
+      </Table.Cell>
+    </Table.Row>
+  );
+};
+
+const FeedbackModal = ({
+  feedbackText,
+  setFeedbackText,
+  sendFeedback,
+  onClose,
+  show,
+  course,
+}) => {
+  return (
+    <Modal show={show} onClose={onClose}>
+      <Modal.Header>Terms of Service</Modal.Header>
+      <Modal.Body>
+        <div className="space-y-6">
+          <input
+            type="text"
+            name=""
+            id=""
+            value={feedbackText}
+            onChange={(e) => {
+              setFeedbackText(e.target.value);
+            }}
+          />
+        </div>
+      </Modal.Body>
+      <Modal.Footer>
+        <Button
+          onClick={() => {
+            const text = "test feedback";
+            sendFeedback(text, course._id);
+          }}
+        >
+          I accept
+        </Button>
+        <Button color="gray" onClick={() => {}}>
+          Decline
+        </Button>
+      </Modal.Footer>
+    </Modal>
   );
 };
 

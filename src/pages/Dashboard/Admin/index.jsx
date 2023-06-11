@@ -6,25 +6,23 @@ import ManageClass from "./ManageClass";
 import ManageUsers from "./ManageUsers";
 
 const Admin = () => {
-  const [selectedPanel, setSelectedPanel] = useState(null);
+  const [selectedPanel, setSelectedPanel] = useState("manageClasses");
 
   return (
-    <div className="flex gap-10 B" style={{ height: "100vh" }}>
+    <div className="flex gap-10" style={{ minHeight: "100vh" }}>
       <div className="">
         <Sidebar aria-label="Sidebar with content separator example">
           <Sidebar.Items className="">
             <Sidebar.ItemGroup>
-              <Sidebar.Item icon={HiChartPie}>
-                <p>Admin Home</p>
-              </Sidebar.Item>
-
               <Sidebar.Item
                 icon={FaClipboardCheck}
                 onClick={() => setSelectedPanel("manageClasses")}
+                className={selectedPanel == "manageClasses" && "bg-slate-200"}
               >
                 <p>Manage Classes</p>
               </Sidebar.Item>
               <Sidebar.Item
+                className={selectedPanel == "manageUsers" && "bg-slate-200"}
                 icon={FaUserCheck}
                 onClick={() => setSelectedPanel("manageUsers")}
               >
