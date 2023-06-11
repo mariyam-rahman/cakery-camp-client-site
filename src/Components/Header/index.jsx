@@ -100,7 +100,14 @@ const Header = () => {
             </Navbar.Link>
           </Link>
         </Navbar.Collapse>
-        <Button onClick={logout}>Log Out</Button>
+
+        {user ? (
+          <Button onClick={logout}>Log Out</Button>
+        ) : (
+          <Link to="/login">
+            <Button>Log In</Button>
+          </Link>
+        )}
       </Navbar>
     </div>
   );
