@@ -15,6 +15,7 @@ export default function Instructor() {
               href="#"
               icon={FaFolderOpen}
               onClick={() => setSelectedPanel("myClasses")}
+              className={selectedPanel == "myClasses" && "bg-slate-200"}
             >
               <p>My Classes</p>
             </Sidebar.Item>
@@ -22,6 +23,7 @@ export default function Instructor() {
               href="#"
               icon={FaFolderPlus}
               onClick={() => setSelectedPanel("addClass")}
+              className={selectedPanel == "addClass" && "bg-slate-200"}
             >
               <p>Add Class</p>
             </Sidebar.Item>
