@@ -15,6 +15,8 @@ import NotFound from "./pages/NotFound";
 // import Admin from "./pages/Dashboard/Admin/Admin";
 // import Instructor from "./pages/Dashboard/InstructorBoard/Instructor";
 
+import AuthProvider from "./AuthProvider";
+
 const router = createBrowserRouter([
   {
     path: "/",
@@ -78,6 +80,8 @@ const router = createBrowserRouter([
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
-    <RouterProvider router={router} />
+    <AuthProvider>
+      <RouterProvider router={router} />
+    </AuthProvider>
   </React.StrictMode>
 );

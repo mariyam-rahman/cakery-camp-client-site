@@ -1,14 +1,14 @@
 import { Avatar, Dropdown, Navbar, Tooltip } from "flowbite-react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import { useContext } from "react";
-import { AuthContext } from "./../../AuthProviders";
+import { useContext, useEffect } from "react";
+import { AuthContext } from "./../../AuthProvider";
 import logo from "../../assets/logo.png";
 
 const Header = () => {
   const navigate = useNavigate();
-  // const { signIn, user, logout } = useContext(AuthContext);
+  const { signIn, user, logout, token } = useContext(AuthContext);
   const location = useLocation();
-  console.log(location);
+  // console.log(location);
 
   return (
     <div>
@@ -96,22 +96,6 @@ const Header = () => {
           <Link to={"/dashboard"}>
             <Navbar.Link active={location.pathname == "/dashboard"}>
               Dashboard
-            </Navbar.Link>
-          </Link>
-          <Link to={"/dashboard/admin"}>
-            <Navbar.Link active={location.pathname == "/dashboard/admin"}>
-              Admin
-            </Navbar.Link>
-          </Link>
-
-          <Link to={"/dashboard/instructor"}>
-            <Navbar.Link active={location.pathname == "/dashboard/instructor"}>
-              Instructor
-            </Navbar.Link>
-          </Link>
-          <Link to={"/dashboard/student"}>
-            <Navbar.Link active={location.pathname == "/dashboard/student"}>
-              Student
             </Navbar.Link>
           </Link>
         </Navbar.Collapse>

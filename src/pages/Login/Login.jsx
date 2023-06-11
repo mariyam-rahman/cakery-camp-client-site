@@ -1,7 +1,7 @@
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import { useContext, useEffect } from "react";
-import { AuthContext } from "./../../AuthProviders";
+import { AuthContext } from "../../AuthProvider";
 
 const Login = () => {
   const location = useLocation();

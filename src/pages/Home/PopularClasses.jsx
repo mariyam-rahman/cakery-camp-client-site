@@ -1,49 +1,67 @@
-import { Card } from "flowbite-react";
+import { Button, Card } from "flowbite-react";
 import img from "./../../assets/bread.jpg";
-
 import { useEffect, useState } from "react";
-import axios from "axios";
+import { Link } from "react-router-dom";
 
 const PopularClasses = () => {
   const [courses, setCourses] = useState([]);
+
   useEffect(() => {
-    axios
-      .get("http://localhost:3000/courses")
-      .then((res) => {
-        console.log(res);
-        setCourses(res.data.courses);
+    fetch("http://localhost:3000/courses")
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+        const popularItems = data.courses.filter(
+          (course) => course.category == "popular"
+        );
+        setCourses(popularItems);
       })
-      .catch(() => {
+      .catch((err) => {
         console.log(err);
       });
   }, []);
+
   return (
     <div className="my-28">
       <h2 className="text-5xl text-center">Our Popular Classes</h2>
       <div className="grid grid-cols-3 gap-6 p-10">
         {courses.map((e) => (
-          <Course title={e.name} details={e.details} />
+          <Course key={e.id} course={e} />
         ))}
+      </div>
+      <div
+        className=" flex
+        justify-center"
+      >
+        <Link to={"/classes"}>
+          <Button>Explore More</Button>
+        </Link>
       </div>
     </div>
   );
 };
 
-const Course = ({ title, details = "details" }) => {
+const Course = ({ course }) => {
   return (
     <Card
       imgAlt="Meaningful alt text for an image that is not purely decorative"
-      imgSrc={img}
+      imgSrc={course.photoUrl}
     >
-      <h5 className="text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
-        <p>{title}</p>
-      </h5>
-      <p className="font-normal text-gray-700 dark:text-gray-400">
-        <p>
-          Here are the biggest enterprise technology acquisitions of 2021 so
-          far, in reverse chronological order.
-        </p>
-      </p>
+      <div className="flex justify-between">
+        <div>
+          <h5 className="text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
+            <p>{course.name}</p>
+          </h5>
+        </div>
+        <div>
+          <p>$ {course.price}</p>
+        </div>
+      </div>
+      <p className="text-slate-600">{course.details} </p>
+      <div className="flex justify-between">
+        <p>Instrutor: {course.instructor.name}</p>
+        <p>Available Seat: {course.availableSeats}</p>
+      </div>
     </Card>
   );
 };
