@@ -13,23 +13,9 @@ const AuthProvider = ({ children }) => {
   const navigate = useNavigate();
   const location = useLocation();
 
-  // useEffect(() => {
-  //   const user = localStorage.getItem("user");
-
-  //   if (user) {
-  //     navigate(location?.state?.redirectTo || "");
-  //   }
-  // }, []);
-
-  const handleGoogleSignIn = () => {};
-
   const createUser = async (name, email, password, photoUrl) => {
     setLoading(true);
 
-    //
-
-    // localStorage.setItem("user", JSON.stringify(res.user));
-    // setUser(res.user);
     setLoading(false);
   };
 
@@ -37,14 +23,13 @@ const AuthProvider = ({ children }) => {
     setLoading(true);
 
     const res = await axios.post(
-      "http://localhost:3000/login",
+      `${import.meta.env.VITE_API_BASE_URL}/login`,
       {
         email,
         password,
       },
       { validateStatus: false }
     );
-    // console.log(res);
 
     if (res.status === 200) {
       setUser(res.data.user);
@@ -100,7 +85,6 @@ const AuthProvider = ({ children }) => {
     createUser,
     signIn,
     logout,
-    handleGoogleSignIn,
   };
 
   return (

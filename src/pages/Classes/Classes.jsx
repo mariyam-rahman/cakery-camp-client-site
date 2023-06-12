@@ -5,7 +5,7 @@ const Classes = () => {
   const [courses, setCourses] = useState([]);
 
   useEffect(() => {
-    fetch("http://localhost:3000/courses")
+    fetch(`${import.meta.env.VITE_API_BASE_URL}/courses`)
       .then((res) => res.json())
       .then((data) => {
         console.log(data);

@@ -8,17 +8,31 @@ import { Button } from "flowbite-react";
 const Login = () => {
   const location = useLocation();
   const navigate = useNavigate();
-  const { signIn, user, handleGoogleSignIn } = useContext(AuthContext);
-  // console.log({ location });
+  const { signIn, user } = useContext(AuthContext);
 
   const handleLogin = async (event) => {
     event.preventDefault();
     const form = event.target;
     const email = form.email.value;
     const password = form.password.value;
-    console.log(email, password);
 
-    signIn(email, password);
+    try {
+      await signIn(email, password);
+      Swal.fire({
+        icon: "success",
+        title: "Login Successful",
+        showConfirmButton: false,
+        timer: 1500,
+      }).then(() => {
+        navigate(location.state?.redirectTo || "/");
+      });
+    } catch (error) {
+      Swal.fire({
+        icon: "error",
+        title: "Login Failed",
+        text: error.message,
+      });
+    }
   };
 
   useEffect(() => {
