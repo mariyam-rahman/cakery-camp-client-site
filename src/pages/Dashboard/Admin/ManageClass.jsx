@@ -110,7 +110,7 @@ const CourseItem = ({ course, changeStatus, sendFeedback }) => {
   return (
     <Table.Row className="bg-white dark:border-gray-700 dark:bg-gray-800">
       <Table.Cell>
-        <img src={img} alt="" />
+        <img src={course.photoUrl} alt="" className="rounded" />
       </Table.Cell>
       <Table.Cell className="whitespace-nowrap font-medium text-gray-900 dark:text-white">
         {course.name}
@@ -119,8 +119,8 @@ const CourseItem = ({ course, changeStatus, sendFeedback }) => {
         <div>{course.instructor.name}</div>
         <div>{course.instructor.email}</div>
       </Table.Cell>
-      <Table.Cell>200+</Table.Cell>
-      <Table.Cell>$299</Table.Cell>
+      <Table.Cell>{course.availableSeats}</Table.Cell>
+      <Table.Cell>$ {course.price}</Table.Cell>
       <Table.Cell>{course.status}</Table.Cell>
       <Table.Cell>
         <Dropdown inline label="Change Status">

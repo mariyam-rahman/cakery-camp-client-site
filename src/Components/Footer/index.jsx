@@ -1,20 +1,25 @@
 import { Footer } from "flowbite-react";
-import logo from "../../assets/logo3.png";
+import logo from "../../assets/logo.png";
 const Footers = () => {
   return (
     <div>
-      <Footer className="bg-slate-300" container>
+      <Footer className="bg-yellow-50" container>
         <div className="w-full ">
-          <div className="grid w-full justify-between sm:flex sm:justify-between md:flex md:grid-cols-1">
+          <div className="grid w-full justify-between sm:flex sm:justify-around md:flex md:grid-cols-1">
             <div>
               <Footer.Brand alt=" Logo" src={logo} className="h-10 sm:h-24" />
+              <p className="w-96">
+                Experience the sweetest summer at our cake bakery summer camp!
+                Learn baking skills, decorate delicious cakes, and make lifelong
+                memories with friends.
+              </p>
             </div>
             <div className="grid grid-cols-2 gap-8 sm:mt-4 sm:grid-cols-3 sm:gap-6">
               <div>
-                <Footer.Title title="about" />
+                <Footer.Title title="Menu" />
                 <Footer.LinkGroup col>
-                  <Footer.Link href="#">Flowbite</Footer.Link>
-                  <Footer.Link href="#">Tailwind CSS</Footer.Link>
+                  <Footer.Link href="/classes">Classes</Footer.Link>
+                  <Footer.Link href="/instructors">Instructors</Footer.Link>
                 </Footer.LinkGroup>
               </div>
               <div>
@@ -34,15 +39,8 @@ const Footers = () => {
             </div>
           </div>
           <Footer.Divider />
-          <div className="w-full sm:flex sm:items-center sm:justify-between">
-            <Footer.Copyright by="Flowbite™" href="#" year={2022} />
-            {/* <div className="mt-4 flex space-x-6 sm:mt-0 sm:justify-center">
-              <Footer.Icon href="#" icon={u} />
-              <Footer.Icon href="#" icon={i} />
-              <Footer.Icon href="#" icon={l} />
-              <Footer.Icon href="#" icon={e} />
-              <Footer.Icon href="#" icon={n} />
-            </div> */}
+          <div className="w-full sm:items-center sm:justify-between">
+            <Footer.Copyright by="The Cakery Camp" href="#" year={2023} />
           </div>
         </div>
       </Footer>

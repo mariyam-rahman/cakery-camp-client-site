@@ -17,10 +17,11 @@ const Banner = () => {
         }}
         navigation={true}
         modules={[Pagination, Navigation]}
-        className="mySwiper h-screen"
+        className="mySwiper"
+        style={{ height: "90vh" }}
       >
         <SwiperSlide className="">
-          <img src={img1} className="" />
+          <img src={img1} />
         </SwiperSlide>
         <SwiperSlide>
           <img src={img2} />

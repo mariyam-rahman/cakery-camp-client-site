@@ -64,7 +64,7 @@ const ManageUsers = () => {
             {users.map((user, i) => (
               <UserRow
                 user={user}
-                index={i}
+                index={i + 1}
                 key={i}
                 changeUserRole={changeUserRole}
               />
@@ -76,11 +76,11 @@ const ManageUsers = () => {
   );
 };
 
-const UserRow = ({ user, changeUserRole }) => {
+const UserRow = ({ user, changeUserRole, index }) => {
   return (
     <Table.Row className="bg-white dark:border-gray-700 dark:bg-gray-800">
       <Table.Cell className="whitespace-nowrap font-medium text-gray-900 dark:text-white">
-        1
+        {index}
       </Table.Cell>
       <Table.Cell>{user.name}</Table.Cell>
       <Table.Cell>{user.email}</Table.Cell>

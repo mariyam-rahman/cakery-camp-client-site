@@ -36,7 +36,14 @@ const Login = () => {
             className="flex items-center mb-6 text-2xl font-semibold text-gray-900 dark:text-white"
           ></Link>
           <div className="w-full bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700">
-            <div className="p-6 space-y-4 md:space-y-6 sm:p-8">
+            <div className="p-6 space-y-4 md:space-y-6 sm:p-8 ">
+              <div className="flex justify-center">
+                <img
+                  className="h-40 "
+                  src="https://img.freepik.com/free-vector/login-concept-illustration_114360-739.jpg?w=740&t=st=1686565943~exp=1686566543~hmac=ddb5d718cd76b9f22fbda94a31e5e0f73e2b451b05fc8417f61cccbe82332c8a"
+                  alt=""
+                />
+              </div>
               <h1 className="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
                 Login to your account
               </h1>
@@ -74,26 +81,12 @@ const Login = () => {
                   />
                 </div>
 
-                <Button type="submit">LOGIN</Button>
+                <div className="flex justify-center">
+                  <Button type="submit">LOGIN</Button>
+                </div>
               </form>
 
-              <p className="text-center text-gray-400">
-                --------------------OR----------------------
-              </p>
-              <div className="text-center">
-                <button
-                  onClick={async () => {
-                    console.log(new Date());
-                    await handleGoogleSignIn().then();
-                    console.log(new Date());
-                    navigate(location.state?.redirectTo || "/");
-                  }}
-                  className="btn"
-                >
-                  Signin with Google
-                </button>
-              </div>
-              <p className="text-sm font-light text-gray-500 dark:text-gray-400">
+              <p className="text-sm font-light text-center text-gray-500 dark:text-gray-400">
                 Don’t have an account yet?{" "}
                 <button
                   onClick={() => {

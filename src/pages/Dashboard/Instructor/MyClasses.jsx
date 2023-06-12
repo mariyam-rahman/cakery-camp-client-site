@@ -66,7 +66,7 @@ const MyClasses = () => {
             </h2>
             <p className="font-light text-gray-500 lg:mb-16 sm:text-xl dark:text-gray-400">
               Explore the whole collection of open-source web components and
-              elements built with the utility classes from Tailwind
+              elements built with the utility classes from Summer Camp
             </p>
           </div>
           <div className="">
@@ -74,6 +74,7 @@ const MyClasses = () => {
               <Table.Head>
                 <Table.HeadCell style={{}}>Image</Table.HeadCell>
                 <Table.HeadCell>Name</Table.HeadCell>
+                <Table.HeadCell>Details</Table.HeadCell>
 
                 <Table.HeadCell>
                   Available <br /> seats
@@ -107,11 +108,12 @@ const Course = ({ course, updateCourse }) => {
 
   return (
     <Table.Row className="bg-white dark:border-gray-700 dark:bg-gray-800">
-      <Table.Cell style={{ flex: 2 }}>
-        <img src="../../../assets/bread.jpg" alt="" />
+      <Table.Cell>
+        <img src={course.photoUrl} className="h-28 rounded" />
       </Table.Cell>
 
       <Table.Cell>{course.name}</Table.Cell>
+      <Table.Cell>{course.details}</Table.Cell>
 
       <Table.Cell>{course.availableSeats}</Table.Cell>
       <Table.Cell>{course.totalEnrolled || 0}</Table.Cell>

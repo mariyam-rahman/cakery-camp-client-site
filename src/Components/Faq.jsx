@@ -3,111 +3,78 @@ import img from "../assets/faq.jpg";
 const Faq = () => {
   return (
     <div className="my-28">
-      <h2 className="text-4xl text-center">FAQ</h2>
+      <div className="mx-auto text-center mb-8 max-w-screen-sm">
+        <h2 className="mb-4  text-4xl tracking-tight font-extrabold text-gray-900 dark:text-white">
+          FAQ
+        </h2>
+        <p className="font-light text-gray-500 sm:text-xl dark:text-gray-400">
+          Explore the whole collection of open-source web components and
+          elements built with the utility classes from Tailwind
+        </p>
+      </div>
       <div className="grid grid-cols-2  gap-10 p-16 items-center">
         <div>
           <Accordion>
             <Accordion.Panel>
-              <Accordion.Title>What is Flowbite?</Accordion.Title>
+              <Accordion.Title>
+                What age group is the cake bakery summer camp suitable for?
+              </Accordion.Title>
               <Accordion.Content>
                 <p className="mb-2 text-gray-500 dark:text-gray-400">
                   <p>
-                    Flowbite is an open-source library of interactive components
-                    built on top of Tailwind CSS including buttons, dropdowns,
-                    modals, navbars, and more.
-                  </p>
-                </p>
-                <p className="text-gray-500 dark:text-gray-400">
-                  <p>Check out this guide to learn how to</p>
-                  <a
-                    className="text-cyan-600 hover:underline dark:text-cyan-500"
-                    href="https://flowbite.com/docs/getting-started/introduction/"
-                  >
-                    <p>get started</p>
-                  </a>
-                  <p>
-                    and start developing websites even faster with components on
-                    top of Tailwind CSS.
+                    The cake bakery summer camp is designed for children and
+                    teenagers aged 8 to above. It offers age-appropriate
+                    activities and lessons to cater to different skill levels
+                    and interests within this range.
                   </p>
                 </p>
               </Accordion.Content>
             </Accordion.Panel>
             <Accordion.Panel>
               <Accordion.Title>
-                Is there a Figma file available?
+                What kind of skills will participants learn at the cake bakery
+                summer camp?
               </Accordion.Title>
               <Accordion.Content>
                 <p className="mb-2 text-gray-500 dark:text-gray-400">
                   <p>
-                    Flowbite is first conceptualized and designed using the
-                    Figma software so everything you see in the library has a
-                    design equivalent in our Figma file.
-                  </p>
-                </p>
-                <p className="text-gray-500 dark:text-gray-400">
-                  <p>Check out the</p>
-                  <a
-                    className="text-cyan-600 hover:underline dark:text-cyan-500"
-                    href="https://flowbite.com/figma/"
-                  >
-                    <p>Figma design system</p>
-                  </a>
-                  <p>
-                    based on the utility classes from Tailwind CSS and
-                    components from Flowbite.
+                    Participants at the cake bakery summer camp will learn a
+                    wide range of baking skills and techniques. They will be
+                    taught how to measure and mix ingredients, bake various
+                    types of cakes, decorate them using different piping
+                    techniques, and even experiment with flavors and fillings.
+                    Additionally, they will learn about kitchen safety and
+                    hygiene practices.
                   </p>
                 </p>
               </Accordion.Content>
             </Accordion.Panel>
             <Accordion.Panel>
               <Accordion.Title>
-                What are the differences between Flowbite and Tailwind UI?
+                Are there any prerequisites or prior experience required to
+                attend the cake bakery summer camp?
               </Accordion.Title>
               <Accordion.Content>
                 <p className="mb-2 text-gray-500 dark:text-gray-400">
                   <p>
-                    The main difference is that the core components from
-                    Flowbite are open source under the MIT license, whereas
-                    Tailwind UI is a paid product. Another difference is that
-                    Flowbite relies on smaller and standalone components,
-                    whereas Tailwind UI offers sections of pages.
+                    No prior experience or specific prerequisites are required
+                    to attend the cake bakery summer camp. It is open to
+                    beginners as well as those with some baking knowledge. The
+                    camp instructors will adapt their teaching to suit different
+                    skill levels, ensuring that everyone can learn and have fun
+                    regardless of their prior experience in baking.
                   </p>
                 </p>
-                <p className="mb-2 text-gray-500 dark:text-gray-400">
-                  <p>
-                    However, we actually recommend using both Flowbite, Flowbite
-                    Pro, and even Tailwind UI as there is no technical reason
-                    stopping you from using the best of two worlds.
-                  </p>
-                </p>
-                <p className="mb-2 text-gray-500 dark:text-gray-400">
-                  Learn more about these technologies:
-                </p>
-                <ul className="list-disc pl-5 text-gray-500 dark:text-gray-400">
-                  <li>
-                    <a
-                      className="text-cyan-600 hover:underline dark:text-cyan-500"
-                      href="https://flowbite.com/pro/"
-                    >
-                      <p>Flowbite Pro</p>
-                    </a>
-                  </li>
-                  <li>
-                    <a
-                      className="text-cyan-600 hover:underline dark:text-cyan-500"
-                      href="https://tailwindui.com/"
-                      rel="nofollow"
-                    >
-                      <p>Tailwind UI</p>
-                    </a>
-                  </li>
-                </ul>
               </Accordion.Content>
             </Accordion.Panel>
           </Accordion>
         </div>
         <div>
-          <img src={img} alt="" />
+          <img
+            src="https://img.freepik.com/free-photo/top-view-birthday-party-table_23-2147716855.jpg?w=1060&t=st=1686557841~exp=1686558441~hmac=5d1b5ae3b7225810e42560c5b5d16297bad92aa8d648bd12ae45439887734b7d"
+            alt=""
+            className="rounded"
+          />
         </div>
       </div>
     </div>

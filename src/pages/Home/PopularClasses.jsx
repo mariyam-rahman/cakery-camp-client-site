@@ -23,7 +23,15 @@ const PopularClasses = () => {
 
   return (
     <div className="my-28">
-      <h2 className="text-5xl text-center">Our Popular Classes</h2>
+      <div className="mx-auto text-center mb-8 max-w-screen-sm">
+        <h2 className="mb-4  text-4xl tracking-tight font-extrabold text-gray-900 dark:text-white">
+          Our Popular Classes
+        </h2>
+        <p className="font-light text-gray-500 sm:text-xl dark:text-gray-400">
+          Explore the whole collection of open-source web components and
+          elements built with the utility classes from Tailwind
+        </p>
+      </div>
       <div className="grid grid-cols-3 gap-6 p-10">
         {courses.map((e) => (
           <Course key={e.id} course={e} />

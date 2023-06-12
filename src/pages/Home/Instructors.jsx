@@ -51,14 +51,14 @@ const Profile = ({ instructor }) => {
     <>
       <div className="text-center text-gray-500 dark:text-gray-400">
         <img
-          className="mx-auto mb-4 w-36 h-36 rounded-full"
+          className="mx-auto mb-4 object-cover w-36 h-36 rounded-full"
           src={instructor.photoUrl}
           alt="Jese Avatar"
         />
         <h3 className="mb-1 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
           {instructor.name}
         </h3>
-        <p>SEO &amp; Marketing</p>
+        <p>{instructor.title}</p>
         <ul className="flex justify-center mt-4 space-x-4">
           <li>
             <a
